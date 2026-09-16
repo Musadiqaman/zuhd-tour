@@ -1,0 +1,1 @@
+export default function Section({eyebrow,title,children,light=false,className=''}){return <section className={`${light?'section section-light':'section'} ${className}`}><div className="container">{eyebrow&&<div className="eyebrow dark">{eyebrow}</div>}<h2>{title}</h2>{children}</div></section>}
