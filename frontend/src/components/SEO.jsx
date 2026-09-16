@@ -1,3 +1,4 @@
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { site } from '../data/siteConfig';
 import { useLanguage } from '../context/LanguageContext';

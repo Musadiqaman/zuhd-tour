@@ -1,3 +1,4 @@
+import React from 'react';
 import SEO from '../components/SEO'; import Section from '../components/Section'; import BookingSection from '../components/BookingSection'; import { site } from '../data/siteConfig'; import { useLanguage } from '../context/LanguageContext';
 const data={
  private:{title:'Private Tours Dubai',description:'Private Dubai tours with flexible schedules, dedicated transport and personalised sightseeing plans.',eyebrow:'PRIVATE EXPERIENCES',points:['Private Dubai city sightseeing','Private desert safari options','Flexible pickup and timing','Vehicle and itinerary tailored to your group']},

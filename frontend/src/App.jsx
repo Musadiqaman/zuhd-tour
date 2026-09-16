@@ -1,3 +1,4 @@
+import React from 'react';
 import SEO from './components/SEO';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
