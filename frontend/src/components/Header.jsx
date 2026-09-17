@@ -47,6 +47,7 @@ export default function Header(){
     ['combo','/combo-tours-dubai',nav.combo],
     ['airport','/dubai-airport-transfer',nav.airport],
     ['blog','/blog',nav.blog],
+    ['gallery','/gallery','Gallery'],
     ['about','/about',nav.about],
     ['contact','/contact',nav.contact],
   ];

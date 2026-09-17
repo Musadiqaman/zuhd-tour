@@ -5,13 +5,13 @@ import { site } from '../data/siteConfig';
 import { useLanguage } from '../context/LanguageContext';
 
 const cityServices = [
-  {title:'Dubai City Tour', kicker:'CITY TOUR', path:'/tours/dubai-city-tour', image:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=92', text:'Explore Dubai’s iconic landmarks, historic districts, souks, Creek, Downtown and waterfront areas.', points:['Dubai landmarks','Old Dubai & souks','Flexible sightseeing']},
-  {title:'Abu Dhabi City Tour', kicker:'CITY TOUR', path:'/tours/abu-dhabi-city-tour', image:'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1800&q=92', text:'Discover Abu Dhabi with a comfortable city sightseeing experience covering major cultural and landmark stops.', points:['Grand Mosque','Corniche & city views','Cultural highlights']},
-  {title:'Private Tours', kicker:'PRIVATE EXPERIENCE', path:'/private-tours', image:'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1800&q=92', text:'Plan a private sightseeing experience around your own schedule, attractions, vehicle and group.', points:['Private vehicle','Flexible itinerary','Personalised support']},
-  {title:'Dhow Cruise', kicker:'WATER EXPERIENCE', path:'/tours/private-dhow-cruise-dubai', image:'https://images.unsplash.com/photo-1721797274530-6f5e612f45f9?auto=format&fit=crop&w=1800&q=92', text:'Enjoy Dubai waterfront views aboard a traditional dhow with comfortable and private arrangements available.', points:['Waterfront views','Traditional dhow','Private arrangements']},
-  {title:'Tour Guide Service', kicker:'TRAVEL SUPPORT', path:'/tour-guides', image:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1800&q=92', text:'Arrange tour-guide support for city sightseeing, private tours and custom UAE travel plans.', points:['Sightseeing support','Private tours','Custom guidance']},
-  {title:'Transport Services', kicker:'TRANSPORT', path:'/transport-services', image:'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1800&q=92', text:'SUV cars, private cars, vans and buses for city tours, airport transfers, groups and events.', points:['SUV & private cars','Vans & buses','Group transport']},
-  {title:'Parks Tickets', kicker:'TICKETS & ATTRACTIONS', path:'/parks-tickets', image:'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=1800&q=92', text:'Arrange tickets for theme parks, water parks and family attractions across Dubai and the UAE.', points:['Theme parks','Water parks','Family attractions']},
+  {title:'Dubai City Tour', kicker:'CITY TOUR', path:'/tours/dubai-city-tour', image:'/assets/ai/ai-dubai-city.jpg', text:'Explore Dubai’s iconic landmarks, historic districts, souks, Creek, Downtown and waterfront areas.', points:['Dubai landmarks','Old Dubai & souks','Flexible sightseeing']},
+  {title:'Abu Dhabi City Tour', kicker:'CITY TOUR', path:'/tours/abu-dhabi-city-tour', image:'/assets/ai/ai-abu-dhabi.jpg', text:'Discover Abu Dhabi with a comfortable city sightseeing experience covering major cultural and landmark stops.', points:['Grand Mosque','Corniche & city views','Cultural highlights']},
+  {title:'Private Tours', kicker:'PRIVATE EXPERIENCE', path:'/private-tours', image:'/assets/ai/ai-dubai-marina.jpg', text:'Plan a private sightseeing experience around your own schedule, attractions, vehicle and group.', points:['Private vehicle','Flexible itinerary','Personalised support']},
+  {title:'Dhow Cruise', kicker:'WATER EXPERIENCE', path:'/tours/private-dhow-cruise-dubai', image:'/assets/images/dhow-cruise.jpg', text:'Enjoy Dubai waterfront views aboard a traditional dhow with comfortable and private arrangements available.', points:['Waterfront views','Traditional dhow','Private arrangements']},
+  {title:'Tour Guide Service', kicker:'TRAVEL SUPPORT', path:'/tour-guides', image:'/assets/ai/ai-dubai-city.jpg', text:'Arrange tour-guide support for city sightseeing, private tours and custom UAE travel plans.', points:['Sightseeing support','Private tours','Custom guidance']},
+  {title:'Transport Services', kicker:'TRANSPORT', path:'/transport-services', image:'/assets/images/hero-dubai.jpg', text:'SUV cars, private cars, vans and buses for city tours, airport transfers, groups and events.', points:['SUV & private cars','Vans & buses','Group transport']},
+  {title:'Parks Tickets', kicker:'TICKETS & ATTRACTIONS', path:'/parks-tickets', image:'/assets/ai/ai-global-village.jpg', text:'Arrange tickets for theme parks, water parks and family attractions across Dubai and the UAE.', points:['Theme parks','Water parks','Family attractions']},
 ];
 
 export default function CityToursPage(){
@@ -31,7 +31,7 @@ export default function CityToursPage(){
           </div>
         </div>
         <div className="city-directory-hero-card">
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=92" alt="Dubai city tours" />
+          <img src="/assets/ai/ai-dubai-city.jpg" alt="Dubai city tours" />
           <div><strong>{tx('Dubai & UAE Experiences')}</strong><span>{tx('City tours • private services • travel support')}</span></div>
         </div>
       </div>
