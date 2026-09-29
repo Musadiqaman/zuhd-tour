@@ -1,12 +1,75 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact_us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/tour-packages",
+      "destination": "/tours",
+      "permanent": true
+    },
+    {
+      "source": "/articles",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/booking/desert-safari",
+      "destination": "/desert-safari-dubai-tours",
+      "permanent": true
+    },
+    {
+      "source": "/booking/abu-dhabi-city-tour",
+      "destination": "/abu-dhabi-city-tours",
+      "permanent": true
+    },
+    {
+      "source": "/booking/dubai-city-tour",
+      "destination": "/tours/dubai-city-tour",
+      "permanent": true
+    },
+    {
+      "source": "/booking/global-village-dubai",
+      "destination": "/global-village-dubai",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abu-dhabi-city-tour",
+      "destination": "/abu-dhabi-city-tours",
+      "permanent": true
+    },
+    {
+      "source": "/tours/global-village-dubai",
+      "destination": "/global-village-dubai",
+      "permanent": true
+    },
+    {
+      "source": "/tours/desert-safari-dubai",
+      "destination": "/desert-safari-dubai-tours",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
       ]
     }
   ]

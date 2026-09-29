@@ -21,7 +21,6 @@ function baseSchema() {
     email: site.email,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: site.licenseAddress,
       addressLocality: 'Dubai',
       addressRegion: 'Dubai',
       addressCountry: 'AE'
@@ -43,7 +42,7 @@ export default function SEO({
   breadcrumbs = [],
   schema = []
 }) {
-  const {tx}=useLanguage();
+  const {tx,language}=useLanguage();
   const localizedTitle=tx(title);
   const localizedDescription=tx(description);
   const fullTitle = localizedTitle.includes(site.name) ? localizedTitle : `${localizedTitle} | ${site.name}`;
@@ -66,7 +65,7 @@ export default function SEO({
   return <Helmet>
     <title>{fullTitle}</title>
     <meta name="description" content={localizedDescription} />
-    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'} />
+    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'} />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={localizedDescription} />
@@ -75,11 +74,11 @@ export default function SEO({
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:alt" content={fullTitle} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:locale" content="en_AE" />
+    <meta property="og:locale" content={language==='ar'?'ar_AE':'en_AE'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={localizedDescription} />
     <meta name="twitter:image" content={imageUrl} />
-    <script type="application/ld+json">{JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
+    <script type="application/ld+json">{JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')}</script>
   </Helmet>;
 }

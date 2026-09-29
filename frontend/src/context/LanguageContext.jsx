@@ -441,8 +441,8 @@ export const languages = Object.entries(dictionaries).map(([code,d])=>({code,lab
 export const LanguageContext = React.createContext(null);
 
 export function LanguageProvider({children}){
-  const [language,setLanguageState]=React.useState(()=>{const saved=localStorage.getItem('zuhd-tours-language');return dictionaries[saved] ? saved : 'en';});
-  const setLanguage=React.useCallback(code=>{if(!dictionaries[code])return;setLanguageState(code);localStorage.setItem('zuhd-tours-language',code);},[]);
+  const [language,setLanguageState]=React.useState(()=>{let saved;try{saved=typeof window!=='undefined'?localStorage.getItem('zuhd-tours-language'):null;}catch{}return dictionaries[saved] ? saved : 'en';});
+  const setLanguage=React.useCallback(code=>{if(!dictionaries[code])return;setLanguageState(code);try{localStorage.setItem('zuhd-tours-language',code);}catch{}},[]);
   const tx=React.useCallback((text)=>language==='ar' ? (ar[text]||text) : text,[language]);
   const value=React.useMemo(()=>({language,setLanguage,t:dictionaries[language].ui,nav:dictionaries[language].nav,dir:dictionaries[language].dir,languageLabel:dictionaries[language].label,tx}),[language,setLanguage,tx]);
   React.useEffect(()=>{document.documentElement.lang=language;document.documentElement.dir=dictionaries[language].dir;document.body.dir=dictionaries[language].dir;},[language]);

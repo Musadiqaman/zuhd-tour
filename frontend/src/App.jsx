@@ -1,6 +1,7 @@
 import React from 'react';
 import SEO from './components/SEO';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { redirects } from './data/seoRoutes';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
@@ -18,6 +19,7 @@ import Gallery from './pages/Gallery';
 function SEO404(){ return <SEO title="Page Not Found" description="The requested Zuhd Tours page could not be found." noindex path="/404"/>; }
 
 export default function App(){return <Layout><Routes>
+  {Object.entries(redirects).map(([from,to])=><Route key={from} path={from} element={<Navigate replace to={to}/>}/>)}
   <Route path="/" element={<Home/>}/>
   <Route path="/tours" element={<ToursPage/>}/>
   <Route path="/services" element={<ServicesPage/>}/>
@@ -33,7 +35,7 @@ export default function App(){return <Layout><Routes>
   <Route path="/dubai-top-city-tour-landmarks" element={<SimplePage kind="landmarks"/>}/>
   <Route path="/gallery" element={<Gallery/>}/>
   <Route path="/about" element={<SimplePage kind="about"/>}/><Route path="/about/" element={<SimplePage kind="about"/>}/>
-  <Route path="/contact" element={<SimplePage kind="contact"/>}/><Route path="/contact_us" element={<SimplePage kind="contact"/>}/><Route path="/contact_us/" element={<SimplePage kind="contact"/>}/>
+  <Route path="/contact" element={<SimplePage kind="contact"/>}/>
   <Route path="/blog" element={<Blog/>}/>
   <Route path="/blog/:slug" element={<BlogPost/>}/>
   <Route path="/tours/:slug" element={<TourPage/>}/>

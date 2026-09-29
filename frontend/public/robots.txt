@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /_debug/
 
-Sitemap: https://zuhdtours.com/sitemap.xml
+Sitemap: https://www.zuhdtours.com/sitemap.xml

@@ -1,7 +1,7 @@
 export const site = {
   name:'Zuhd Tours',
   shortName:'Zuhd Tours',
-  domain:'https://zuhdtours.com',
+  domain:'https://www.zuhdtours.com',
   phone:'+971 50 375 3481',
   phones:['+971 50 375 3481','+971 55 448 7319'],
   whatsapp:'https://wa.me/971503753481',

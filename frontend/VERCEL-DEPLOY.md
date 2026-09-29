@@ -1,25 +1,8 @@
-# Zuhd Tours — Vercel Deployment
+# Deploy this SEO build on Vercel
 
-## Deploy with Vercel
+Use the existing project and domain. Root Directory: frontend.
+The included vercel.json defines Framework: Other (null), Build Command: npm run build, Output Directory: dist, clean URLs and permanent redirects.
 
-1. Extract this ZIP.
-2. Push the project folder to GitHub (recommended), or import the folder into Vercel.
-3. In Vercel, choose **Other / Vite** if it asks for a framework.
-4. Use these settings:
-   - Framework Preset: **Vite**
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-5. Deploy.
+Run npm ci, npm run build, npm run check:seo. Deploy the updated source through the existing Git workflow. The build must include scripts/prerender.mjs; do not use only vite build.
 
-`vercel.json` is included so React Router URLs such as `/desert-safari-dubai-tours`, `/dubai-city-tours`, `/about`, `/contact`, and `/blog/...` continue to work after refresh/direct navigation.
-
-## Local check
-
-```bash
-npm install
-npm run build
-npm run preview
-```
-
-No database or server-side setup is required for this frontend.
+Do not add a catch-all rewrite to index.html: pages now have real static HTML files, and unknown URLs must return 404. See SEO-UPDATE-2026-09-29.md for the migration and Search Console checklist.

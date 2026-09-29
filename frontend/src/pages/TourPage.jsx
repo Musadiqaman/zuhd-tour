@@ -8,11 +8,11 @@ import { useLanguage } from '../context/LanguageContext';
 
 const desertSafariDetails = {
   description:
-    'Scintillating dune bashing with BBQ dinner at the only authentic Bedouin Oasis camp in Ras Al Khaimah.',
+    'Scintillating dune bashing with BBQ dinner at a desert camp in Dubai.',
   highlights: [
     '45 min of Desert Dune Bashing by 4×4 Vehicle',
-    'BBQ dinner at a Bedouin Oasis camp',
-    'Pick-up & drop-off within Ras Al Khaimah',
+    'BBQ dinner at a desert camp',
+    'Pickup and drop-off: confirm coverage with our team',
     'Short camel ride',
     'Sand boarding',
     'Evening snacks',
@@ -21,7 +21,7 @@ const desertSafariDetails = {
     'Henna painting',
   ],
   included: [
-    'Pick & drop off within Ras Al Khaimah',
+    'Pickup and drop-off: confirm coverage with our team',
     '45 min desert dune bashing by 4×4 vehicle',
     'Short camel ride',
     'Sand boarding',
@@ -51,19 +51,19 @@ export default function TourPage({ slug: fixedSlug }) {
 
   if (!tour) {
     return (
-      <div className="not-found">
+      <><SEO title="Tour Not Found" description="This tour could not be found." noindex path={`/tours/${slug}`} /><div className="not-found">
         <div>
           <h1>404</h1>
           <p>{tx('Tour not found.')}</p>
           <Link className="btn btn-primary" to="/">{tx('Back home')}</Link>
         </div>
-      </div>
+      </div></>
     );
   }
 
   const isDesertSafari = tour.slug === 'desert-safari-dubai';
   const safari = isDesertSafari ? desertSafariDetails : null;
-  const path = `/tours/${tour.slug}`;
+  const path = tour.slug === 'abu-dhabi-city-tour' ? '/abu-dhabi-city-tours' : tour.slug === 'global-village-dubai' ? '/global-village-dubai' : `/tours/${tour.slug}`;
   const locationText = tour.title.toLowerCase().includes('abu dhabi') ? 'Abu Dhabi, UAE' : 'Dubai, UAE';
   const title = tx(tour.title);
   const description = safari?.description || `${tx(tour.subtitle)} ${title} in ${locationText}. Contact Zuhd Tours for availability, transport and booking details.`;
@@ -78,7 +78,7 @@ export default function TourPage({ slug: fixedSlug }) {
     url: `${site.domain}${path}`,
     image: tour.image,
     provider: { '@id': `${site.domain}/#organization` },
-    areaServed: { '@type': 'City', name: isDesertSafari ? 'Ras Al Khaimah' : locationText.replace(', UAE', '') },
+    areaServed: { '@type': 'City', name: isDesertSafari ? 'Dubai' : locationText.replace(', UAE', '') },
   };
 
   if (tour.price && /^AED\s*\d/.test(tour.price)) {
@@ -161,7 +161,7 @@ export default function TourPage({ slug: fixedSlug }) {
               <div className="safari-info-panel">
                 <div><strong>Max Guests</strong><span>{safari.maxGuests}</span></div>
                 <div><strong>Min Age</strong><span>{safari.minAge}</span></div>
-                <div><strong>Tour Location</strong><span>Ras Al Khaimah</span></div>
+                <div><strong>Tour Location</strong><span>Dubai</span></div>
                 <div><strong>Vegetarian Option</strong><span>Available</span></div>
               </div>
 

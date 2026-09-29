@@ -10,19 +10,19 @@ const safari = {
   duration: '1 day',
   rating: '4.2 / 5',
   reviews: '3 verified reviews',
-  location: 'Ras Al Khaimah, UAE',
+  location: 'Dubai, UAE',
   maxGuests: '50',
   minAge: '12+',
   description:
-    'Scintillating dune bashing with BBQ dinner at the only authentic Bedouin Oasis camp in Ras Al Khaimah.',
+    'Scintillating dune bashing with BBQ dinner at a desert camp in Dubai.',
   highlights: [
     '45 min of desert dune bashing by 4×4 vehicle',
-    'BBQ dinner at a Bedouin Oasis camp',
-    'Pick-up & drop-off within Ras Al Khaimah',
+    'BBQ dinner at a desert camp',
+    'Pickup and drop-off: confirm coverage with our team',
     'Vegetarian option available',
   ],
   included: [
-    'Pick & drop off within Ras Al Khaimah',
+    'Pickup and drop-off: confirm coverage with our team',
     '45 min desert dune bashing by 4×4 vehicle',
     'Short camel ride',
     'Sand boarding',
@@ -53,7 +53,7 @@ const heroImage =
 export default function DesertSafariPage() {
   const path = '/desert-safari-dubai-tours';
   const description =
-    'Desert Safari with 45-minute dune bashing, camel ride, sandboarding, BBQ buffet dinner and Bedouin Oasis entertainment in Ras Al Khaimah.';
+    'Desert Safari with 45-minute dune bashing, camel ride, sandboarding, BBQ buffet dinner and desert camp entertainment in Dubai.';
 
   const schema = {
     '@type': 'Service',
@@ -64,7 +64,7 @@ export default function DesertSafariPage() {
     url: `${site.domain}${path}`,
     image: heroImage,
     provider: { '@id': `${site.domain}/#organization` },
-    areaServed: { '@type': 'City', name: 'Ras Al Khaimah' },
+    areaServed: { '@type': 'City', name: 'Dubai' },
     offers: {
       '@type': 'Offer',
       priceCurrency: 'AED',
@@ -92,7 +92,7 @@ export default function DesertSafariPage() {
           <div className="breadcrumbs safari-breadcrumbs">
             <Link to="/">Home</Link> / Desert Safari
           </div>
-          <span className="eyebrow">DESERT SAFARI • RAS AL KHAIMAH</span>
+          <span className="eyebrow">DESERT SAFARI • DUBAI</span>
           <h1>Desert Safari</h1>
           <p>{safari.description}</p>
           <div className="safari-hero-actions">
