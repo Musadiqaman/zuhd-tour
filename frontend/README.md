@@ -1,3 +1,7 @@
+# Latest update: 11 October 2026
+
+See `CHANGES-2026-10-11.md` for the complete safari, city tour, Transfer, FAQ and homepage update, imported prices, and installation steps.
+
 # Zuhd Tours — Final Homepage Reference Build
 
 This is the final React/Vite implementation of the Zuhd Tours homepage direction: premium navy/gold styling, responsive navigation, Tours/Destinations mega menus, local image assets, mobile navigation, floating contact controls, destination strip, popular tours, packages, testimonials, travel guides, FAQ and a complete responsive footer.

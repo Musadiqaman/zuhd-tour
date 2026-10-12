@@ -60,6 +60,16 @@
       "source": "/tours/desert-safari-dubai",
       "destination": "/desert-safari-dubai-tours",
       "permanent": true
+    },
+    {
+      "source": "/dubai-airport-transfer",
+      "destination": "/transfers",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/faqs",
+      "permanent": true
     }
   ],
   "headers": [

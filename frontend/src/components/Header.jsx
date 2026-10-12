@@ -1,93 +1,13 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import { site } from '../data/siteConfig';
-import { languages, useLanguage } from '../context/LanguageContext';
-
-/*
-  Simplified navigation inspired by the clean structure of Gulf Dunes Tourism:
-  no nested mega menus; all tour categories are presented on the dedicated Tours page.
-*/
+import { useLanguage } from '../context/LanguageContext';
 export default function Header(){
-  const [mobile,setMobile]=React.useState(false);
-  const [lang,setLang]=React.useState(false);
-  const location=useLocation();
-  const navRef=React.useRef(null);
-  const menuRef=React.useRef(null);
-  const {language,setLanguage,nav,languageLabel}=useLanguage();
-
-  const close=React.useCallback(()=>{
-    setMobile(false);
-    setLang(false);
-  },[]);
-
-  React.useEffect(()=>{ close(); },[location.pathname, close]);
-  React.useEffect(()=>{
-    document.body.style.overflow=mobile?'hidden':'';
-    if(mobile && menuRef.current) menuRef.current.scrollTop=0;
-    return()=>{document.body.style.overflow=''};
-  },[mobile]);
-  React.useEffect(()=>{
-    const onKey=e=>{if(e.key==='Escape') close();};
-    document.addEventListener('keydown',onKey);
-    return()=>document.removeEventListener('keydown',onKey);
-  },[close]);
-  React.useEffect(()=>{
-    const onClick=e=>{
-      if(navRef.current && !navRef.current.contains(e.target)) setLang(false);
-    };
-    document.addEventListener('mousedown',onClick);
-    return()=>document.removeEventListener('mousedown',onClick);
-  },[]);
-
-  const links=[
-    ['home','/',nav.home],
-    ['desert','/desert-safari-dubai-tours',nav.desert],
-    ['city','/dubai-city-tours',nav.city],
-    ['combo','/combo-tours-dubai',nav.combo],
-    ['airport','/dubai-airport-transfer',nav.airport],
-    ['blog','/blog',nav.blog],
-    ['gallery','/gallery','Gallery'],
-    ['about','/about',nav.about],
-    ['contact','/contact',nav.contact],
-  ];
-
-  return <header className="header" ref={navRef}>
-    <div className="container nav">
-      <Logo onClick={close}/>
-      <button className={`menu-btn ${mobile?'active':''}`} onClick={()=>setMobile(v=>!v)} aria-label="Toggle navigation" aria-expanded={mobile}>
-        <span/><span/><span/>
-      </button>
-
-      <nav ref={menuRef} className={`nav-links ${mobile?'open':''}`} aria-label="Primary navigation">
-        {links.map(([key,path,label])=><Link
-          key={key}
-          to={path}
-          onClick={close}
-          className={(key==='home' ? location.pathname==='/' : location.pathname===path || (key==='desert' && location.pathname.startsWith('/tours/desert-safari'))) ? 'active' : ''}
-        >{label}</Link>)}
-
-        <div className={`nav-language ${lang?'is-open':''}`}>
-          <button className="language-main" onClick={()=>setLang(v=>!v)} aria-expanded={lang} aria-haspopup="menu">
-            {language === 'ar' ? 'اللغة' : 'Language'} <span>⌄</span>
-          </button>
-          <div className="language-menu main-language-menu" role="menu">
-            {languages.map(item=><button
-              type="button"
-              role="menuitem"
-              key={item.code}
-              className={item.code===language?'selected':''}
-              onClick={()=>{setLanguage(item.code);setLang(false)}}
-            >
-              <span>{item.label}</span>{item.code===language&&<b>✓</b>}
-            </button>)}
-          </div>
-        </div>
-
-        <a className="nav-book" href={site.whatsapp} target="_blank" rel="noreferrer" onClick={close}>
-          {nav.book} <span>→</span>
-        </a>
-      </nav>
-    </div>
-  </header>;
+  const [open,setOpen]=React.useState(false),location=useLocation(),toggle=React.useRef(null),menu=React.useRef(null);const {nav,language,setLanguage}=useLanguage();
+  React.useEffect(()=>setOpen(false),[location.pathname,location.hash]);
+  React.useEffect(()=>{if(!open)return;const previous=document.body.style.overflow;document.body.style.overflow='hidden';const onKey=e=>{if(e.key==='Escape'){setOpen(false);toggle.current?.focus()}if(e.key==='Tab'){const focusable=[toggle.current,...menu.current.querySelectorAll('a,button,select')].filter(x=>x&&x.offsetParent!==null);const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}};document.addEventListener('keydown',onKey);const mq=window.matchMedia('(min-width: 1201px)');const onResize=()=>{if(mq.matches)setOpen(false)};mq.addEventListener('change',onResize);return()=>{document.body.style.overflow=previous;document.removeEventListener('keydown',onKey);mq.removeEventListener('change',onResize)};},[open]);
+  const links=[['/',nav.home],['/desert-safari-dubai-tours',nav.desert],['/dubai-city-tours',nav.city],['/transfers',language==='ar'?'خدمات النقل':'Transfer'],['/faqs',language==='ar'?'الأسئلة الشائعة':'FAQs'],['/blog',nav.blog],['/gallery',language==='ar'?'المعرض':'Gallery'],['/about',nav.about],['/contact',nav.contact]];
+  function active(path){const p=location.pathname;if(path==='/')return p==='/';if(path==='/desert-safari-dubai-tours')return p===path||/\/tours\/(.*safari|quad-bike|dune-buggy|desert-bbq)/.test(p);if(path==='/dubai-city-tours')return p===path||p==='/abu-dhabi-city-tours'||/\/tours\/(dubai-city|sharjah-city|ras-al-khaimah-city)/.test(p);return p.startsWith(path)}
+  return <><a className="exp-skip-link" href="#main-content">Skip to content</a><header className="exp-header"><div className="container exp-nav"><Logo/><button ref={toggle} type="button" className={`exp-menu-toggle ${open?'is-open':''}`} onClick={()=>setOpen(x=>!x)} aria-controls="main-navigation" aria-expanded={open} aria-label={open?'Close navigation':'Open navigation'}><span/><span/><span/></button><nav ref={menu} id="main-navigation" aria-label="Primary navigation" className={`exp-nav-links ${open?'is-open':''}`}>{links.map(([path,label])=><Link key={path} to={path} onClick={()=>setOpen(false)} className={active(path)?'is-active':''} aria-current={active(path)?'page':undefined}>{label}</Link>)}<select className="exp-language" aria-label="Website language" value={language} onChange={e=>setLanguage(e.target.value)}><option value="en">EN</option><option value="ar">العربية</option></select><a className="exp-nav-book" href={site.whatsapp} target="_blank" rel="noreferrer">{nav.book}<span>↗</span></a></nav></div></header></>;
 }

@@ -2,6 +2,8 @@ import { tours, posts } from './siteData.js';
 
 // Only observed old URLs with equivalent replacement content belong here.
 export const redirects = {
+  '/dubai-airport-transfer': '/transfers',
+  '/faq': '/faqs',
   '/home': '/',
   '/contact_us': '/contact',
   '/tour-packages': '/tours',
@@ -17,7 +19,7 @@ export const redirects = {
 export const pageRoutes = [
   '/', '/tours', '/services', '/desert-safari-dubai-tours', '/dubai-city-tours',
   '/abu-dhabi-city-tours', '/global-village-dubai', '/private-tours', '/tour-guides',
-  '/transport-services', '/parks-tickets', '/combo-tours-dubai', '/dubai-airport-transfer',
+  '/transport-services', '/parks-tickets', '/combo-tours-dubai', '/transfers', '/faqs',
   '/dubai-top-city-tour-landmarks', '/gallery', '/about', '/contact', '/blog',
   ...tours.map(t => `/tours/${t.slug}`).filter(path => !redirects[path]),
   ...posts.map(p => `/blog/${p.slug}`),

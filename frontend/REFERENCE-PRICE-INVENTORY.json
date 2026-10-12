@@ -1,0 +1,68 @@
+{
+  "checked_on": "2026-10-11",
+  "prices": [
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/city-tours/abu-dhabi",
+      "amount_aed": 250
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/city-tours/dubai",
+      "amount_aed": 200
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/city-tours/ras-al-khaimah",
+      "amount_aed": 260
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/city-tours/sharjah",
+      "amount_aed": 160
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/evening-safari",
+      "amount_aed": 180
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/morning-safari",
+      "amount_aed": 150
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/overnight-safari",
+      "amount_aed": 450
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/adventure",
+      "amount_aed": 280
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/bbq-dinner",
+      "amount_aed": 200
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/dune-buggy",
+      "amount_aed": 350
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/family-safari",
+      "amount_aed": 190
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/desert-safari/quad-bike",
+      "amount_aed": 120
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/transfers/",
+      "title": "Airport Pickup & Drop-off",
+      "amount_aed": 90
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/transfers/",
+      "title": "Hotel Pickup & Drop-off",
+      "amount_aed": 70
+    },
+    {
+      "source": "https://wwwzuhdtourscom.netlify.app/transfers/",
+      "title": "Private Transfer",
+      "amount_aed": 250
+    }
+  ]
+}

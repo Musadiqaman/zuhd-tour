@@ -27,7 +27,9 @@ function baseSchema() {
     },
     areaServed: [
       { '@type': 'City', name: 'Dubai' },
-      { '@type': 'City', name: 'Abu Dhabi' }
+      { '@type': 'City', name: 'Abu Dhabi' },
+      { '@type': 'City', name: 'Sharjah' },
+      { '@type': 'City', name: 'Ras Al Khaimah' }
     ]
   };
 }

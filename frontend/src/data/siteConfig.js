@@ -9,6 +9,6 @@ export const site = {
   location:'Bur Dubai – Al Raffa, Dubai, UAE',
   licenseAddress:'Office No. 41-105, Sheikh Ahmed Bin Rashid Bin Saeed Al Maktoum, Bur Dubai – Al Raffa.',
   tagline:'Dubai Tours • Desert Safaris • Travel Services',
-  defaultImage:'https://images.unsplash.com/photo-1634007626524-f47fa37810a7?auto=format&fit=crop&w=2200&q=90',
+  defaultImage:"/assets/experiences/ab2540c169121f6e.webp",
   facebook:'#',instagram:'#',youtube:'#',tiktok:'#'
 };

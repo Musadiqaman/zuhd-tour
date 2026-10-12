@@ -15,6 +15,8 @@ import ToursPage from './pages/ToursPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import DesertSafariPage from './pages/DesertSafariPage';
 import Gallery from './pages/Gallery';
+import TransfersPage from './pages/TransfersPage';
+import FaqPage from './pages/FaqPage';
 
 function SEO404(){ return <SEO title="Page Not Found" description="The requested Zuhd Tours page could not be found." noindex path="/404"/>; }
 
@@ -31,7 +33,8 @@ export default function App(){return <Layout><Routes>
   <Route path="/transport-services" element={<ServiceDetailPage kind="transport"/>}/>
   <Route path="/parks-tickets" element={<ServiceDetailPage kind="parks"/>}/>
   <Route path="/combo-tours-dubai" element={<SimplePage kind="combo"/>}/>
-  <Route path="/dubai-airport-transfer" element={<SimplePage kind="transfer"/>}/>
+  <Route path="/transfers" element={<TransfersPage/>}/>
+  <Route path="/faqs" element={<FaqPage/>}/>
   <Route path="/dubai-top-city-tour-landmarks" element={<SimplePage kind="landmarks"/>}/>
   <Route path="/gallery" element={<Gallery/>}/>
   <Route path="/about" element={<SimplePage kind="about"/>}/><Route path="/about/" element={<SimplePage kind="about"/>}/>
