@@ -1,0 +1,69 @@
+{
+  "source": "User attachments",
+  "files": {
+    "1079": "buggy-dune-drive",
+    "1080": "buggy-main",
+    "1081": "buggy-sunset",
+    "1082": "buggy-adventure",
+    "1083": "buggy-desert-trail",
+    "1084": "adventure-desert-camp",
+    "1086": "adventure-falcon",
+    "1087": "adventure-main",
+    "1088": "adventure-desert-photography",
+    "1090": "morning-camel-ride",
+    "1091": "morning-sandboarding",
+    "1092": "morning-desert-views",
+    "1093": "morning-main",
+    "1097": "evening-camp",
+    "1098": "evening-bbq-dinner",
+    "1099": "evening-camel-caravan",
+    "1100": "evening-main",
+    "1101": "evening-tanoura-show"
+  },
+  "groups": {
+    "morning-safari": [
+      "morning-main",
+      "morning-camel-ride",
+      "morning-sandboarding",
+      "morning-desert-views"
+    ],
+    "evening-safari": [
+      "evening-main",
+      "evening-camp",
+      "evening-bbq-dinner",
+      "evening-camel-caravan",
+      "evening-tanoura-show"
+    ],
+    "dune-buggy": [
+      "buggy-main",
+      "buggy-dune-drive",
+      "buggy-sunset",
+      "buggy-adventure",
+      "buggy-desert-trail"
+    ],
+    "adventure": [
+      "adventure-main",
+      "adventure-falcon",
+      "adventure-desert-camp",
+      "adventure-desert-photography"
+    ],
+    "overnight-safari": [
+      "evening-camp",
+      "evening-camel-caravan",
+      "evening-bbq-dinner"
+    ],
+    "bbq-dinner": [
+      "evening-bbq-dinner",
+      "evening-tanoura-show",
+      "evening-camp"
+    ],
+    "family-safari": [
+      "morning-camel-ride",
+      "morning-desert-views",
+      "evening-camp"
+    ]
+  },
+  "logo": "1000151078.jpg",
+  "reviewLayoutReference": "1000151102.jpg",
+  "notes": "Morning: 1090–1093. Evening: 1097–1101. Night camp photos are also used on overnight/BBQ pages. Package facts and prices are unchanged."
+}

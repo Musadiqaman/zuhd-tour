@@ -1,0 +1,33 @@
+import React from 'react';
+import SEO from '../components/SEO';
+import EnquiryForm from '../components/EnquiryForm';
+import { PageIntro, SectionHeading, Icon, FaqList } from '../components/ExperienceUI';
+import { imagery, transferServices, enquiryLink } from '../data/experienceCatalog';
+import { faqGroups, faqSchema } from '../data/faqData';
+import { site } from '../data/siteConfig';
+export default function TransfersPage() {
+  const [selected, setSelected] = React.useState('');
+  const faqs = faqGroups[2].items;
+  return <div className="experience-page"><SEO title="Dubai Transfers: Airport, Hotel & City Travel | Zuhd Tours" description="Dubai airport transfers from AED 90, hotel transfers from AED 70 and private or city transfers from AED 250. Request your route and vehicle quote." path="/transfers" image={imagery.transfer} breadcrumbs={[{
+      name: 'Home',
+      path: '/'
+    }, {
+      name: 'Transfer',
+      path: '/transfers'
+    }]} schema={[faqSchema(faqs), ...transferServices.map(t => ({
+      '@type': 'Service',
+      name: t.title,
+      description: t.description,
+      url: `${site.domain}/transfers#${t.id}`,
+      provider: {
+        '@id': `${site.domain}/#organization`
+      },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'AED',
+        price: t.amount,
+        name: 'Starting transfer fare',
+        url: `${site.domain}/transfers#${t.id}`
+      }
+    }))]} /><PageIntro eyebrow="YOUR JOURNEY, TAKEN CARE OF" title="Airport, hotel & city transfers." description="A smooth arrival, a reliable hotel pickup or a private journey between cities. Plan your route with Zuhd Tours." image={imagery.transfer} breadcrumbs={[["Transfer"]]}><a className="exp-btn exp-btn-gold" href="#transfer-enquiry">Arrange your transfer <Icon /></a></PageIntro><section className="exp-section exp-sand"><div className="container"><SectionHeading eyebrow="CHOOSE YOUR JOURNEY" title="The right ride for your plans." description="Starting fares are shown below. Your route, travel time, vehicle and luggage determine the final quote." /><div className="exp-grid exp-grid-three">{transferServices.map(t => <article id={t.id} className="exp-transfer-card exp-transfer-full" key={t.id}><img src={t.image} alt={t.title} width="800" height="480" loading="lazy" /><div><h2>{t.title}</h2><p>{t.description}</p><ul>{t.highlights.map(h => <li key={h}><Icon name="check" />{h}</li>)}</ul><div className="exp-transfer-foot"><strong><small>From</small> AED {t.amount}</strong></div><a className="exp-btn exp-btn-navy" href="#transfer-enquiry" onClick={() => setSelected(t.title)}>Request this transfer <Icon /></a><a className="exp-text-link" href={enquiryLink(t)} target="_blank" rel="noreferrer">Ask on WhatsApp <Icon name="chat" /></a></div></article>)}</div></div></section><section className="exp-section"><div className="container"><SectionHeading eyebrow="ROOM FOR YOUR JOURNEY" title="Choose a vehicle that fits." description="Passenger capacity depends on luggage and child-seat requirements. Our team confirms the final vehicle before travel." /><div className="exp-vehicle-grid">{[['Sedan', '1–3 passengers', 'For solo travellers and smaller groups.'], ['SUV', '1–5 passengers', 'More space for families and travel companions.'], ['Van', '1–10 passengers', 'A practical choice for groups travelling together.']].map(([n, c, d]) => <article key={n}><Icon name="car" /><h3>{n}</h3><strong>{c}</strong><p>{d}</p></article>)}</div><div className="exp-intercity"><Icon name="pin" /><div><h2>Travelling between cities?</h2><p>Tell us your pickup and destination in Dubai, Abu Dhabi, Sharjah or Ras Al Khaimah. Custom intercity routes, extra stops and hourly or full-day hire are quoted for your itinerary.</p></div></div></div></section><section className="exp-enquiry" id="transfer-enquiry"><div className="container exp-enquiry-grid"><div><span className="exp-eyebrow">SEND US YOUR ROUTE</span><h2>A little detail.<br /><em>A smoother journey.</em></h2><p>Add your flight number for airport pickup, and include luggage, child seats or a return journey in your request.</p><p>The form opens a prepared WhatsApp message. Your transfer is confirmed after the team agrees the availability and price with you.</p></div><EnquiryForm key={selected} transfer defaultTour={selected} id="transfer-booking-form" /></div></section><section className="exp-section"><div className="container exp-faq-split"><div><span className="exp-eyebrow">BEFORE YOU TRAVEL</span><h2>Your transfer questions.</h2></div><FaqList items={faqs} /></div></section></div>;
+}

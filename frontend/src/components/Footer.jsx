@@ -1,0 +1,8 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Logo from './Logo';
+import { site } from '../data/siteConfig';
+import { safaris, cityTours } from '../data/experienceCatalog';
+export default function Footer() {
+  return <footer className="exp-footer"><div className="container exp-footer-grid"><div className="exp-footer-brand"><Logo /><p>Desert adventures, city discoveries and journeys across the UAE. Thoughtfully arranged by Zuhd Tours.</p><a className="exp-footer-chat" href={site.whatsapp} target="_blank" rel="noreferrer">Let’s plan your trip ↗</a></div><div><h2>Desert experiences</h2>{[safaris[0], safaris[1], safaris[4], safaris[6], safaris[7]].map(t => <Link key={t.slug} to={t.path}>{t.title}</Link>)}<Link to="/desert-safari-dubai-tours">View all 8 safaris →</Link></div><div><h2>Explore the UAE</h2>{cityTours.map(t => <Link key={t.slug} to={t.path}>{t.title}</Link>)}<Link to="/transfers">Transfer services</Link><Link to="/services">All services</Link></div><div><h2>We’re here to help</h2><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><span>{site.location}</span><Link to="/faqs">Frequently asked questions</Link><Link to="/about">About Zuhd Tours</Link><Link to="/contact">Contact our team</Link></div></div><div className="container exp-footer-bottom"><span>© {new Date().getFullYear()} Zuhd Tours. All rights reserved.</span><div><Link to="/blog">Travel guides</Link><Link to="/gallery">Gallery</Link><a href="/sitemap.xml">Sitemap</a><Link to="/privacy-policy">Privacy</Link><Link to="/terms-of-use">Terms</Link></div><span>Dubai, United Arab Emirates</span></div></footer>;
+}

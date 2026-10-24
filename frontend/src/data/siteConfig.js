@@ -1,0 +1,20 @@
+export const site = {
+  name: 'Zuhd Tours',
+  shortName: 'Zuhd Tours',
+  domain: 'https://www.zuhdtours.com',
+  phone: '+971 50 375 3481',
+  phones: ['+971 50 375 3481', '+971 55 448 7319'],
+  whatsapp: 'https://wa.me/971503753481',
+  email: 'Info@zuhdtours.com',
+  location: 'Bur Dubai – Al Raffa, Dubai, UAE',
+  licenseAddress: 'Office No. 41-105, Sheikh Ahmed Bin Rashid Bin Saeed Al Maktoum, Bur Dubai – Al Raffa.',
+  tagline: 'Dubai Tours • Desert Safaris • Travel Services',
+  defaultImage: "/images/safaris/evening-main.webp",
+  googleMapsUrl: 'https://maps.app.goo.gl/xFMfxpXM7EULLtuJ6',
+  facebook: '',
+  instagram: '',
+  youtube: '',
+  tiktok: '',
+  x: '',
+  linkedin: ''
+};

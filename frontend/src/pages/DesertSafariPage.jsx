@@ -1,0 +1,18 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { PageIntro, SectionHeading, ExperienceCard, FaqList, BookingCta, Icon } from '../components/ExperienceUI';
+import { safaris, imagery, listSchema } from '../data/experienceCatalog';
+import { faqGroups, faqSchema } from '../data/faqData';
+export default function DesertSafariPage() {
+  const [filter, setFilter] = React.useState('All');
+  const items = filter === 'All' ? safaris : safaris.filter(t => t.timeOfDay === filter);
+  const faqs = faqGroups[0].items;
+  return <div className="experience-page"><SEO title="Dubai Desert Safari Packages & Prices | Zuhd Tours" description="Compare 8 Dubai desert adventures: morning, evening, overnight, family, BBQ dinner, adventure, quad biking and dune buggy. Prices, pickup and inclusions." path="/desert-safari-dubai-tours" image={imagery.desert} breadcrumbs={[{
+      name: 'Home',
+      path: '/'
+    }, {
+      name: 'Desert Safari',
+      path: '/desert-safari-dubai-tours'
+    }]} schema={[listSchema(safaris), faqSchema(faqs)]} /><PageIntro eyebrow="EIGHT WAYS TO EXPERIENCE THE DUNES" title="Dubai Desert Safari" description="From early morning light to a night beneath the stars. Compare every safari, find your pace and plan your desert escape." image={imagery.desert} breadcrumbs={[["Desert Safari"]]}><a className="exp-btn exp-btn-gold" href="#safari-packages">Find your safari <Icon /></a></PageIntro><section className="exp-section exp-sand" id="safari-packages"><div className="container"><SectionHeading eyebrow="YOUR ADVENTURE STARTS HERE" title="Choose a moment. Make it yours." description="Every package below has its own pickup details, inclusions and starting adult price." /><div className="exp-filter-row" aria-label="Filter safari packages">{['All', 'Morning', 'Evening', 'Adventure', 'Family', 'Overnight'].map(f => <button key={f} type="button" onClick={() => setFilter(f)} aria-pressed={filter === f} className={filter === f ? 'is-active' : ''}>{f === 'All' ? 'All 8 experiences' : f === 'Overnight' ? 'Night & overnight' : f}</button>)}</div><div className="exp-grid exp-grid-four" aria-live="polite">{items.map(t => <ExperienceCard key={t.slug} tour={t} />)}</div></div></section><section className="exp-section"><div className="container"><SectionHeading eyebrow="AT A GLANCE" title="Compare your desert day." description="Quad and buggy durations describe riding time. Pickup time and the final total are confirmed with your booking." /><div className="exp-table-wrap"><table className="exp-comparison"><caption>Dubai safari starting adult prices and pickup arrangements</caption><thead><tr><th scope="col">Experience</th><th scope="col">Duration</th><th scope="col">From / adult</th><th scope="col">Pickup</th></tr></thead><tbody>{safaris.map(t => <tr key={t.slug}><th scope="row"><Link to={t.path}>{t.title} ↗</Link></th><td>{t.duration}</td><td>AED {t.amount}</td><td>{['quad-bike', 'dune-buggy'].includes(t.id) ? 'Optional add-on' : 'Central Dubai included'}</td></tr>)}</tbody></table></div></div></section><section className="exp-section exp-sand"><div className="container exp-faq-split"><div><span className="exp-eyebrow">BEFORE YOU GO</span><h2>Your safari questions, answered.</h2><Link className="exp-text-link" to="/faqs">All frequently asked questions <Icon /></Link></div><FaqList items={faqs} /></div></section><BookingCta /></div>;
+}

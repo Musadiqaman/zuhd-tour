@@ -1,0 +1,22 @@
+import React from 'react';
+import SEO from '../components/SEO';
+import { PageIntro, BookingCta } from '../components/ExperienceUI';
+import { safaris, cityTours, imagery } from '../data/experienceCatalog';
+const collection = [...safaris, ...cityTours].flatMap(t => [t.image, ...(t.gallery || [])].map((src, i) => ({
+  src,
+  title: t.title,
+  category: t.category,
+  index: i
+})));
+const gallery = collection.filter((t, i) => collection.findIndex(x => x.src === t.src) === i);
+export default function Gallery() {
+  const [filter, setFilter] = React.useState('All');
+  const items = gallery.filter(t => filter === 'All' || t.category === filter);
+  return <div className="experience-page"><SEO title="Dubai Desert Safari & UAE City Tour Gallery | Zuhd Tours" description="Explore desert safari, overnight camp and UAE city-tour imagery from Zuhd Tours. Find inspiration for your next Dubai experience." path="/gallery" image={imagery.desert} breadcrumbs={[{
+      name: 'Home',
+      path: '/'
+    }, {
+      name: 'Gallery',
+      path: '/gallery'
+    }]} /><PageIntro eyebrow="A LITTLE TRAVEL INSPIRATION" title="Picture your next adventure." description="Explore the dunes, desert camps and cityscapes featured across our tour collection." image={imagery.desert} breadcrumbs={[["Gallery"]]} /><section className="exp-section exp-sand"><div className="container"><div className="exp-filter-row" aria-label="Filter gallery">{['All', 'Desert Safari', 'City Tours'].map(f => <button key={f} type="button" onClick={() => setFilter(f)} aria-pressed={filter === f} className={filter === f ? 'is-active' : ''}>{f}</button>)}</div><div className="exp-gallery-grid">{items.map(t => <figure key={t.src}><a href={t.src} target="_blank" rel="noreferrer" aria-label={`Open ${t.title} image`}><img src={t.src} alt={`${t.title} travel inspiration, view ${t.index + 1}`} loading="lazy" decoding="async" /></a><figcaption><span>{t.category}</span>{t.title}</figcaption></figure>)}</div><p className="exp-price-note">Tour imagery includes illustrative visuals. Ask our team about the location, vehicle and arrangements for your selected experience.</p></div></section><BookingCta /></div>;
+}

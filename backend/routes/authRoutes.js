@@ -1,0 +1,13 @@
+import express from 'express';
+import { authStatus, setupAdmin, login, me, logout, changePassword } from '../controllers/authController.js';
+import { requireAuth, csrf } from '../middlewares/auth.js';
+import { loginLimiter, limited, cookieNoStore } from '../middlewares/rateLimit.js';
+const router = express.Router();
+router.use(cookieNoStore);
+router.get('/status', authStatus);
+router.post('/setup', loginLimiter, setupAdmin);
+router.post('/login', loginLimiter, login);
+router.get('/me', requireAuth, me);
+router.post('/logout', requireAuth, csrf, logout);
+router.post('/password', requireAuth, csrf, limited(6), changePassword);
+export default router;
