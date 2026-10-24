@@ -25,6 +25,11 @@ assert.equal((sitemap.match(/<loc>/g)||[]).length, pageRoutes.length);
 const config = JSON.parse(await readFile('vercel.json','utf8'));
 assert(!(config.rewrites||[]).some(r=>['/(.*)','/:path*','/:path(.*)'].includes(r.source)), 'A catch-all rewrite would cause soft 404s');
 assert(config.rewrites.some(r=>r.source==='/blog/:slug'&&r.destination.includes('/api/proxy')), 'New blog URLs need server rendering');
+if (config.cleanUrls) {
+  for (const rewrite of config.rewrites || []) {
+    assert(!rewrite.destination.split('?')[0].endsWith('.html'), `cleanUrls rewrites must use extensionless destinations: ${rewrite.source}`);
+  }
+}
 assert.equal(config.framework, null);
 for (const [from,to] of Object.entries(redirects)) {
   assert(pageRoutes.includes(to), `Invalid redirect target: ${from}`);

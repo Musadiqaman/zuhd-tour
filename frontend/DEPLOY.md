@@ -40,7 +40,7 @@ Test `https://YOUR-BACKEND.vercel.app/api/health`: expect `{"ok":true,"database"
 ## Vercel frontend
 
 Project Root Directory: **frontend**
-Build Command: **npm run build**
+Build Command: use the command from **frontend/vercel.json** (`npm run build && node scripts/prepare-vercel.mjs`)
 Output Directory: **dist**
 
 Add only these two server environment variables:
@@ -53,6 +53,8 @@ Add only these two server environment variables:
 Never add the `VITE_` prefix. Neither value belongs in the browser bundle. Elfsight ID belongs on the backend only; public widget configuration comes from its API.
 
 Redeploy Vercel after changing its environment. The included `vercel.json` proxies `/api`, `/media`, `/blog`, `/blog/:slug` and `/sitemap.xml` to the backend. Other public pages remain prerendered on Vercel.
+
+The Vercel-only preparation step removes static blog and sitemap copies from `dist` after SEO checks. Otherwise those files take priority over the backend rewrites and would keep serving old content after an admin publishes or edits a guide. Normal local/backend builds retain their complete output.
 
 First admin route: `https://www.zuhdtours.com/admin/setup`. Use backend SETUP_TOKEN, create the account, then blank that token and restart the backend. Existing accounts must sign in through `/admin/login`.
 

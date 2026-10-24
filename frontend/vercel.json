@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && node scripts/prepare-vercel.mjs",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
@@ -135,12 +135,8 @@
       "destination": "/api/proxy?path=sitemap.xml"
     },
     {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
       "source": "/admin/:path*",
-      "destination": "/admin.html"
+      "destination": "/admin"
     }
   ]
 }
