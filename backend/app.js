@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
 import { config } from './config/env.js';
 import { originGuard } from './middlewares/auth.js';
 import { equal } from './utils/security.js';
@@ -14,7 +13,8 @@ import { publicPost, xmlEscape } from './utils/content.js';
 import api from './routes/index.js';
 import { pageRoutes, redirects } from '../frontend/src/data/seoRoutes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
-export function createApp() {
+import { initializeRuntime } from './services/runtime.js';
+export function createApp({ initialize } = {}) {
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', config.trustProxy);
@@ -49,7 +49,16 @@ export function createApp() {
   app.use(express.json({
     limit: '512kb'
   }));
+  // Vercel imports the app without running server.js. Share one initialization
+  // promise across concurrent requests and let Express handle startup errors.
+  if (initialize) app.use(async (req, res, next) => {
+    await initialize();
+    next();
+  });
   app.use('/api', api);
+  if (process.env.VERCEL === '1') app.get('/', (req, res) => {
+    res.set('Cache-Control', 'no-store').json({ ok: true, service: 'Zuhd Tours API', health: '/api/health' });
+  });
   app.get('/media/:filename', async (req, res) => {
     if (!/^[a-f0-9]{24}\.webp$/.test(req.params.filename)) return res.status(404).end();
     const image = await Media.findById(req.params.filename.slice(0, -5)).select('+data').lean();
@@ -78,7 +87,8 @@ export function createApp() {
   let rendererPromise;
   async function renderPage(req, res, data, status = 200) {
     if (!existsSync(path.join(frontend, 'server-dist/entry-server.js')) || !existsSync(path.join(dist, 'app-shell.html'))) return res.status(503).type('text').send('Website build is not ready. Run npm run build.');
-    rendererPromise ??= import(pathToFileURL(path.join(frontend, 'server-dist/entry-server.js')).href);
+    // A literal import lets Vercel trace the renderer and its React dependencies.
+    rendererPromise ??= import('../frontend/server-dist/entry-server.js');
     const [{
       render
     }, template] = await Promise.all([rendererPromise, readFile(path.join(dist, 'app-shell.html'), 'utf8')]);
@@ -153,3 +163,6 @@ export function createApp() {
   app.use(errorHandler);
   return app;
 }
+
+// Native Vercel Express entry point; local hosting still uses server.js.
+export default createApp({ initialize: initializeRuntime });

@@ -16,15 +16,11 @@ const {
   Media,
   Settings
 } = await import('../models/index.js');
-const {
-  connectDatabase
-} = await import('../config/db.js');
+const { config } = await import('../config/env.js');
 const {
   seedExistingGuides
 } = await import('../services/seed.js');
-const {
-  createApp
-} = await import('../app.js');
+const { default: app } = await import('../app.js');
 const {
   sha
 } = await import('../utils/security.js');
@@ -47,12 +43,26 @@ try {
       storageEngine: 'wiredTiger'
     }
   });
-  await connectDatabase(mongo.getUri());
-  await seedExistingGuides();
-  await seedExistingGuides();
-  server = createApp().listen(0, '127.0.0.1');
+  config.mongo = mongo.getUri();
+  assert.equal(mongoose.connection.readyState, 0, 'Importing app must not connect during build');
+  server = app.listen(0, '127.0.0.1');
   await new Promise(r => server.once('listening', r));
   const base = 'http://127.0.0.1:' + server.address().port;
+  const validSetupToken = config.setupToken;
+  config.setupToken = 'short';
+  const failedStartup = await fetch(base + '/api/health');
+  assert.equal(failedStartup.status, 500);
+  assert.deepEqual(await failedStartup.json(), { error: 'Something went wrong. Please try again.' });
+  assert.equal(mongoose.connection.readyState, 0);
+  config.setupToken = validSetupToken;
+  passed('failed initialization returns a safe response and allows a later retry');
+  await Promise.all(Array.from({ length: 4 }, async () => {
+    const response = await fetch(base + '/api/health');
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { ok: true, database: true });
+  }));
+  await seedExistingGuides();
+  passed('Vercel default entry initializes MongoDB for simultaneous cold requests');
   async function request(path, method = 'GET', body, options = {}) {
     const headers = {
       origin: 'http://localhost:5173',
@@ -171,7 +181,6 @@ try {
   assert.equal((await request('/api/admin/reviews', 'GET', null, {
     anonymous: true
   })).status, 401);
-  const { config } = await import('../config/env.js');
   assert.equal((await request('/api/public/reviews')).data.appId, '');
   config.elfsightAppId = '<script>alert(1)</script>';
   assert.equal((await request('/api/admin/reviews')).data.configured, false);
@@ -378,6 +387,12 @@ try {
   assert.equal(r.status, 200);
   assert.equal((await request('/api/admin/posts')).status, 401);
   passed('logout invalidates the session');
+  await mongoose.disconnect();
+  const reconnected = await request('/api/health');
+  assert.equal(reconnected.status, 200);
+  assert.deepEqual(reconnected.data, { ok: true, database: true });
+  assert.equal((await request('/api/auth/status')).data.initialized, true);
+  passed('a warm function reconnects without resetting the existing admin');
   console.log(`\n${checks} integration scenarios passed.`);
 } finally {
   if (server) await new Promise(r => server.close(r));
