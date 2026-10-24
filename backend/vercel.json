@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "express",
+  "installCommand": "npm ci --omit=dev && npm --prefix ../frontend ci --include=dev",
+  "buildCommand": "npm run build",
+  "functions": {
+    "app.js": {
+      "includeFiles": "../frontend/{server-dist/**,dist/{app-shell,admin,404}.html}"
+    }
+  }
+}

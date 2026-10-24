@@ -23,7 +23,21 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 Set this as **PROXY_SECRET** on the backend and the same value on Vercel. Your backend host must expose an HTTPS origin, for example `https://api.your-domain.com`. Keep this proxy secret separate from SETUP_TOKEN.
 
-## Vercel
+## Vercel backend (alternative to a separate Node host)
+
+Create a second Vercel project from the same repository, with Root Directory **backend** and Framework **Express**. Enable **Include source files outside of the Root Directory**. Leave the Output Directory override off. `backend/vercel.json` installs both folders and builds the frontend renderer; `backend/app.js` exports the Express application and initializes MongoDB on the first request.
+
+Use Node.js **24.x**. In this backend project's environment settings, keep the production variables above and add:
+
+| Variable | Value |
+| --- | --- |
+| `NODE_OPTIONS` | `--experimental-require-module` |
+
+Set it for Production and for any Preview environment you use, then redeploy. This is required because `sanitize-html@2.18.1` loads the ESM-only `htmlparser2` dependency through `require()`, which Vercel disables by default. Keep the sanitizer installed. See [Vercel's documented runtime setting](https://vercel.com/docs/functions/runtimes/node-js/advanced-node-configuration#experimental-node.js-require-of-es-module).
+
+Test `https://YOUR-BACKEND.vercel.app/api/health`: expect `{"ok":true,"database":true}`. Use this backend's HTTPS origin for `BACKEND_ORIGIN` on the frontend project. Preview deployments need their own test database and credentials; do not give unreviewed previews production credentials.
+
+## Vercel frontend
 
 Project Root Directory: **frontend**
 Build Command: **npm run build**
